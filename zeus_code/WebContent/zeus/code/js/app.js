@@ -13,13 +13,7 @@ angular.module('zeus-code', ['ngAnimate', 'ngResource', 'ui.router', 'ui.bootstr
 		      	"@": {
 		              templateUrl: 'views/master.html',
 		              controller: ['Node', function(Node){
-		              	this.list = [{
-		              		cn_id: 1,
-		              		cn_name: "dirigible_123456"
-		              	},{
-      			            cn_id: 2,
-		              		cn_name: "dirigible_98765"
-		              	}];
+		              	this.list = [];
 		              	var self = this;
 		              	
 /*		              	Node.query().$promise
@@ -30,6 +24,18 @@ angular.module('zeus-code', ['ngAnimate', 'ngResource', 'ui.router', 'ui.bootstr
 		              		console.error(err);
 		              		throw err;
 		              	});*/
+		              	
+		              	this.createItem = function(){
+		              		Node.save().$promise
+		              		.then(function(node){
+	              				self.list.push(node);
+	              			})
+	              			.catch(function(err){
+	              				console.error(err);
+	              				throw err;
+	              			});
+
+		              	}
 		              }],
 		              controllerAs: 'masterVm'
 		      	}

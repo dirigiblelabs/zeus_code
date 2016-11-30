@@ -14,10 +14,11 @@
 .brick {
    	flex: 1 0 auto;
     margin-right: 2rem; 
+    margin-bottom: 2rem;
 }
 
 .brick .btn {
-    font-size: 2.5vh;
+    font-size: 1.2em;
     min-width: 0;
     height: 100%;
     width: 100%;
@@ -36,8 +37,8 @@
     right: 0;
     opacity: 0.3;
     color: rgba(0, 0, 0, 0.3);
-    font-size: 16vh;
-    line-height: 20vh;
+    font-size: 5em;
+    line-height: 7em;
     text-align: center;
 }
 
@@ -53,54 +54,75 @@
 }
 
 .toolbar-item .btn {
-   font-size: 2vh;
+   font-size: 1em;
    display: flex;
    flex-flow: column nowrap;
    justify-content: space-between;   
    color: #337ab7;
+   background: #333;
 /*   border-radius: 50%;*/
 }
 
+.toolbar-item .btn:hover {
+   color: #337ab7;
+   background: #4c4c4c;
+}
+
 .toolbar-item .btn:after {
-    font-size: 7vh;
-    line-height: 10vh;
+    font-size: 5em;
+    line-height: 8em;
 }
 
 .toolbar-item .btn .title {
 	flex: 1 0 auto;
-	align-self: flex-start;
+	text-align: left;
+/*	align-self: flex-start;*/
 	overflow: hidden;
     white-space: nowrap;
-    text-overflow: ellipsis;  
+    text-overflow: ellipsis;
     font-weight: 700;	
+    font-size: 1.3em;
+    min-width: 0;
 }
 
 .toolbar-item .btn .fa {
 	align-self: flex-end;
-    color: rgba(0,0,0, 0.3);
-    opacity: 0.3;
-    font-size: 6vh;
+    color: rgba(0,0,0, 0.5);
+    opacity: 0.5;
+    font-size: 5em;
 }
 
-.divider {
-	border-top: 1px #ccc solid;
-	height: 1px;
+.toolbar-item.tool .btn {
+	background-color: #f5f5f5;
+	color: #7b7b7b;
+}
+.toolbar-item.tool .btn:hover {
+	color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}
+.toolbar-item.tool .btn .fa {
+	align-self: center; 
+	font-size: 12em; 
+	color: inherit;
+	line-height: 184px;
 }
 </style>
 
 <div class="col-xs-12 col-md-12 page">
 	<div class="masonry toolbar">
 	
-		<div class="brick toolbar-item">
-	        <div class="btn btn-default import-background" ng-click="emptyVm.createItem()" >
-	            <span class="title">Add Dev Node</span><i class="fa fa-plus"></i>
+		<div class="brick toolbar-item tool">
+	        <div class="btn btn-default" ng-click="masterVm.createItem()">
+	        	<i class="fa fa-plus"></i>
 	        </div>
 	    </div>    
 	    
-		<div class="brick toolbar-item"ng-repeat="item in masterVm.list">
-	        <div class="btn btn-default import-background" ui-sref="list.entity.import">
-	            <span class="title" ng-bind="item.cn_name"></span><i class="fa fa-code"></i>
-	        </div>
+		<div class="brick toolbar-item" ng-repeat="item in masterVm.list">
+	        <a class="btn btn-default" ng-href="item.cn_url">
+	            <span class="title" ng-bind="item.cn_name"></span>
+	            <i class="fa fa-code"></i>
+	        </a>
 	    </div>    
     </div>
 </div> 

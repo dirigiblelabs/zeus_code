@@ -30,7 +30,7 @@
 	}])
 	.service('Node', ['$resource', 'ResourceSvcConfiguration', function($resource, ResourceSvcConfiguration) {
 		var cfg = angular.copy(ResourceSvcConfiguration.cfg);
-	  	return $resource('../../js/zeus/code/svc/node.js/:nodeId', { nodeId:'@id' }, cfg);
+	  	return $resource('../../../js/zeus/code/svc/node.js/:nodeId', { nodeId:'@id' }, cfg);
 	}])
 	.service('NodeCount', ['$resource', function($resource) {
 	  	return $resource('../../js/zeus/code/svc/node.js/count', {}, 
