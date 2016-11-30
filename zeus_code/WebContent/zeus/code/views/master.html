@@ -1,10 +1,106 @@
-<div class="items-list">
-	<div ng-hide="masterVm.list.length" class="nodata-text">No list</div>
-	<div class="list-group" ng-if="masterVm.list.length>0">
-	  <div class="list-group-item" ng-repeat="node in masterVm.list|filter:masterVm.searchText|orderBy:['cn_name']">
-		<div class="node-list-item">
-			<a class="title" ng-bind="node.cn_name" href></a>
-		</div>
-	  </div>	
-	</div>
-</div>
+<style>
+.page [class*='col-'] {
+	overflow-y: auto;
+    height: 100%;
+	padding-right: 15px;
+}
+
+.masonry {
+    display: flex;
+    flex-flow: row wrap;
+    margin: 2rem 0;    
+}
+
+.brick {
+   	flex: 1 0 auto;
+    margin-right: 2rem; 
+}
+
+.brick .btn {
+    font-size: 2.5vh;
+    min-width: 0;
+    height: 100%;
+    width: 100%;
+    margin: auto 0;
+    display: flex;
+    position: relative;
+    overflow: hidden; 
+}
+
+.brick .btn:after {
+	font-family: FontAwesome;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0.3;
+    color: rgba(0, 0, 0, 0.3);
+    font-size: 16vh;
+    line-height: 20vh;
+    text-align: center;
+}
+
+.toolbar {
+	min-height: 200px;
+}
+
+.toolbar-item {
+   min-width: 200px;
+   max-width: 200px;
+   min-height: 200px;
+   max-height: 200px;
+}
+
+.toolbar-item .btn {
+   font-size: 2vh;
+   display: flex;
+   flex-flow: column nowrap;
+   justify-content: space-between;   
+   color: #337ab7;
+/*   border-radius: 50%;*/
+}
+
+.toolbar-item .btn:after {
+    font-size: 7vh;
+    line-height: 10vh;
+}
+
+.toolbar-item .btn .title {
+	flex: 1 0 auto;
+	align-self: flex-start;
+	overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;  
+    font-weight: 700;	
+}
+
+.toolbar-item .btn .fa {
+	align-self: flex-end;
+    color: rgba(0,0,0, 0.3);
+    opacity: 0.3;
+    font-size: 6vh;
+}
+
+.divider {
+	border-top: 1px #ccc solid;
+	height: 1px;
+}
+</style>
+
+<div class="col-xs-12 col-md-12 page">
+	<div class="masonry toolbar">
+	
+		<div class="brick toolbar-item">
+	        <div class="btn btn-default import-background" ng-click="emptyVm.createItem()" >
+	            <span class="title">Add Dev Node</span><i class="fa fa-plus"></i>
+	        </div>
+	    </div>    
+	    
+		<div class="brick toolbar-item"ng-repeat="item in masterVm.list">
+	        <div class="btn btn-default import-background" ui-sref="list.entity.import">
+	            <span class="title" ng-bind="item.cn_name"></span><i class="fa fa-code"></i>
+	        </div>
+	    </div>    
+    </div>
+</div> 
