@@ -16,17 +16,26 @@
 
 </head>
 
-<body ng-app="zeus-code">
+<body ng-app="zeus-code" style="margin-left: 20px; padding-right: 20px">
 
 	<div class="container-fluid">
+	
+		<div class="row">
+			<div class="col-lg-12">
+		    	<h1 class="page-header">Development Decks</h1>
+			</div>
+		</div>
 		
 		<div class="row-fluid">
 		
 			<header class="list-header">
-<!--				<div class="pull-left">
-					<a ui-sref="list"><i class="fa fa-home"></i></a>
-				</div>
--->				<div>
+					<div class="pull-left">
+<!--
+						<a ui-sref="list"><i class="fa fa-home"></i></a>
+-->
+					</div>
+				<div>
+					
 					<a ui-sref="list({view:'tiles'})" ui-sref-opts="{reload: true}"><i class="fa fa-th"></i></a>
 					<a ui-sref="list({view:'list'})" ui-sref-opts="{reload: true}"><i class="fa fa-list"></i></a>
 				</div>

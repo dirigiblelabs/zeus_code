@@ -29,7 +29,7 @@ html, body, .page {
 }
 
 .page {
-    border-top: 1px solid #ccc;	
+    border-top: 1px dotted #eee;	
 }
 
 .page [class*='col-'] {
