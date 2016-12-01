@@ -1,0 +1,20 @@
+.toolbar-item .btn {
+	color: #337ab7;
+	background: #333;
+}
+.toolbar-item .btn:hover {
+   color: #337ab7;
+   background: #4c4c4c;
+}
+.toolbar-item .btn .fa {
+	color: #000;
+}
+.toolbar-item.tool .btn {
+	color: #7b7b7b;
+	background: #f5f5f5;
+}
+.toolbar-item.tool .btn:hover {
+	color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}
