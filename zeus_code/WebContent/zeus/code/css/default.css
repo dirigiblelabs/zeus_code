@@ -1,0 +1,39 @@
+html, body, .page {
+	min-width:100%;
+	min-height:100%;	
+}
+
+.list-header {
+	color:#a4a4a4;
+	font-size: 2.6rem;
+	margin: 10px 0;
+	display: flex;
+    justify-content: flex-end;	
+}
+
+.list-header div {
+	flex: 0 1 auto;
+}
+
+.list-header a {
+	margin:10px 0;
+	text-decoration:none;
+}
+
+.list-header b:focus {
+	outline:none;
+}
+
+.list-header a:visited {
+	color: #337ab7;
+}
+
+.page {
+    border-top: 1px solid #ccc;	
+}
+
+.page [class*='col-'] {
+	overflow-y: auto;
+    height: 100%;
+	padding-right: 15px;
+}

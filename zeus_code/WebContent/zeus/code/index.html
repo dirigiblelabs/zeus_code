@@ -21,17 +21,21 @@
 
 	<div class="container-fluid">
 		
-		<div class="row-fluid page">
+		<div class="row-fluid">
 		
-			<header class="page-title">
-				<span style="font-weight:700; font-size: 3rem;">Zeus Code</span>
-				<div class="pull-right" style="color:#a4a4a4; font-size: 2.6rem;">
-					<a style="margin-left:15px;margin-right:15px; text-decoration:none;outline:none" ui-sref="list.empty"><i class="fa fa-home"></i></a>				
+			<header class="list-header">
+<!--				<div class="pull-left">
+					<a ui-sref="list"><i class="fa fa-home"></i></a>
+				</div>
+-->				<div>
+					<a ui-sref="list({view:'tiles'})" ui-sref-opts="{reload: true}"><i class="fa fa-th"></i></a>
+					<a ui-sref="list({view:'list'})" ui-sref-opts="{reload: true}"><i class="fa fa-list"></i></a>
 				</div>
 			</header>
-			
+		
 			<div class="page-content">
-				<div ui-view></div>
+				<div class="col-xs-12 col-md-12 page" ui-view>
+				</div>
 			</div>
 			
 		</div>

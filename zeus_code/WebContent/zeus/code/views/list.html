@@ -1,0 +1,11 @@
+<div class="btn btn-primary" ng-click="masterVm.createItem()" style="margin:10px 0;">
+	<i class="fa fa-plus"></i>
+</div>
+
+<ul class="nav nav-pills nav-stacked">
+	<li ng-repeat="item in masterVm.list" role="presentation" style="border: 1px solid #ccc">
+		<a href>
+	        <span class="title" ng-bind="item.cn_name"></span>
+	    </a>
+    </li>    
+</ul>

@@ -8,22 +8,30 @@ angular.module('zeus-code', ['ngAnimate', 'ngResource', 'ui.router', 'ui.bootstr
 		
 		$stateProvider	
 		.state('list', {
-			  url: "/",
+			  url: "/:view",
+			  params: {
+			  	view: undefined
+			  },
 		      views: {
 		      	"@": {
-		              templateUrl: 'views/master.html',
+		              templateUrl: function($stateParams){
+		              	if($stateParams.view === 'list')
+		              		return 'views/list.html';
+		              	else
+		              		return 'views/tiles.html';
+		              },
 		              controller: ['Node', function(Node){
 		              	this.list = [];
 		              	var self = this;
 		              	
-/*		              	Node.query().$promise
+		              	Node.query().$promise
 		              	.then(function(data){
 		              		self.list = data;
 		              	})
 		              	.catch(function(err){
 		              		console.error(err);
 		              		throw err;
-		              	});*/
+		              	});
 		              	
 		              	this.createItem = function(){
 		              		Node.save().$promise

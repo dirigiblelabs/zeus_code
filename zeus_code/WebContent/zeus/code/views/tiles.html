@@ -1,10 +1,4 @@
 <style>
-.page [class*='col-'] {
-	overflow-y: auto;
-    height: 100%;
-	padding-right: 15px;
-}
-
 .masonry {
     display: flex;
     flex-flow: row wrap;
@@ -109,20 +103,18 @@
 }
 </style>
 
-<div class="col-xs-12 col-md-12 page">
-	<div class="masonry toolbar">
-	
-		<div class="brick toolbar-item tool">
-	        <div class="btn btn-default" ng-click="masterVm.createItem()">
-	        	<i class="fa fa-plus"></i>
-	        </div>
-	    </div>    
-	    
-		<div class="brick toolbar-item" ng-repeat="item in masterVm.list">
-	        <a class="btn btn-default" ng-href="item.cn_url">
-	            <span class="title" ng-bind="item.cn_name"></span>
-	            <i class="fa fa-code"></i>
-	        </a>
-	    </div>    
-    </div>
-</div> 
+<div class="masonry toolbar">
+
+	<div class="brick toolbar-item tool">
+        <div class="btn btn-default" ng-click="masterVm.createItem()">
+        	<i class="fa fa-plus"></i>
+        </div>
+    </div>    
+    
+	<div class="brick toolbar-item" ng-repeat="item in masterVm.list">
+        <a class="btn btn-default" ng-href="item.cn_url">
+            <span class="title" ng-bind="item.cn_name"></span>
+            <i class="fa fa-code"></i>
+        </a>
+    </div>    
+</div>
