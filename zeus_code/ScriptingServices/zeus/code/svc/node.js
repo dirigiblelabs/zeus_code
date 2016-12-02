@@ -25,7 +25,7 @@
 			var httpClient = require('net/http/client');
 			var namespace = "default";
 			var deploymentData = {
-				'name': 'july' + new Date().getTime(),
+				'name': 'deck-' + new Date().getTime(),
 				'image': 'docker.io/dirigiblelabs/dirigible-tomcat:latest',
 				'replicas': 1,
 				'env': [{
