@@ -16,7 +16,7 @@
 			var httpClient = require('net/http/client');
 			var namespace = "default";
 			var deploymentData = {
-				'name': null,
+				'name': 'july' + new Date().getTime(),
 				'image': 'docker.io/dirigiblelabs/dirigible-tomcat:latest',
 				'replicas': 1,
 				'env': [{
@@ -30,18 +30,19 @@
 					'targetCPUUtilizationPercentage': 50
 				}
 			};
-		
-			var httpResponse = httpClient.post('js/zeus/api/landscapes.js?namespace=' + namespace,{ 
+
+			var httpResponse = httpClient.post('http://localhost:8080/services/js/zeus/api/landscapes.js?namespace=' + namespace, { 
+				'headers': [],
 				'body': JSON.stringify(deploymentData)
 			});
-		
+
 			var data = JSON.parse(httpResponse.data);
-			console.info(JSON.stringify(data));
-	    	//TODO: request new landscape instance
+			var env = require('core/env');
 	    	var nodeJson = {
-	    		cn_name: "dirigible_123_" + new Date().toString(),
-	    		cn_url: ""
+	    		cn_name: data.deployment.metadata.name,
+	    		cn_url: env.get('zeus.landscapes.ip') + ':' + data.service.spec.ports[0].nodePort
 	    	};
+	    	console.error(nodeJson);
 	    	io.response.println(JSON.stringify(nodeJson));
 			io.response.setStatus(io.response.OK);
 			io.response.setHeader('Location', nodeJson.url);

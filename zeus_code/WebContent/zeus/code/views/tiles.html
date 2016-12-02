@@ -112,7 +112,7 @@
     </div>    
     
 	<div class="brick toolbar-item" ng-repeat="item in masterVm.list">
-        <a class="btn btn-default" ng-href="item.cn_url">
+        <a class="btn btn-default" href="{{item.cn_url}}" target="_blank">
             <span class="title" ng-bind="item.cn_name"></span>
             <i class="fa fa-code"></i>
         </a>
