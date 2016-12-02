@@ -31,13 +31,7 @@
 				'env': [{
 					'name': 'DefaultDB_username',
 					'value': 'root'
-				}],
-				'autoscale': {
-					'enabled': false,
-					'minReplicas': 1,
-					'maxReplicas': 5,
-					'targetCPUUtilizationPercentage': 50
-				}
+				}]
 			};
 
 			var httpResponse = httpClient.post('http://localhost:8080/services/js/zeus/api/landscapes.js?namespace=' + namespace, { 
