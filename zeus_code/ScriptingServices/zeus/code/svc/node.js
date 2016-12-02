@@ -12,6 +12,31 @@
 	Node.prototype.cfg[""].post.produces = "application/json";
 	Node.prototype.cfg[""].post.handler = function(context, io) {
 	    try{
+			
+			var httpClient = require('net/http/client');
+			var namespace = "default";
+			var deploymentData = {
+				'name': null,
+				'image': 'docker.io/dirigiblelabs/dirigible-tomcat:latest',
+				'replicas': 1,
+				'env': [{
+					'name': 'DefaultDB_username',
+					'value': 'root'
+				}],
+				'autoscale': {
+					'enabled': false,
+					'minReplicas': 1,
+					'maxReplicas': 5,
+					'targetCPUUtilizationPercentage': 50
+				}
+			};
+		
+			var httpResponse = httpClient.post('js/zeus/api/landscapes.js?namespace=' + namespace,{ 
+				'body': JSON.stringify(deploymentData)
+			});
+		
+			var data = JSON.parse(httpResponse.data);
+			console.info(JSON.stringify(data));
 	    	//TODO: request new landscape instance
 	    	var nodeJson = {
 	    		cn_name: "dirigible_123_" + new Date().toString(),
