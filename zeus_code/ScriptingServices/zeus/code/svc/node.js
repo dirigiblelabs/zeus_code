@@ -13,22 +13,6 @@
 	Node.prototype.cfg[""].get.handler = function(context, io) {
 		var httpClient = require('net/http/client');
 			var namespace = "default";
-			var deploymentData = {
-				'name': 'july' + new Date().getTime(),
-				'image': 'docker.io/dirigiblelabs/dirigible-tomcat:latest',
-				'replicas': 1,
-				'env': [{
-					'name': 'DefaultDB_username',
-					'value': 'root'
-				}],
-				'autoscale': {
-					'enabled': false,
-					'minReplicas': 1,
-					'maxReplicas': 5,
-					'targetCPUUtilizationPercentage': 50
-				}
-			};
-
 			var httpResponse = httpClient.get('http://localhost:8080/services/js/zeus/api/landscapes.js?namespace=' + namespace);
 
 			var data = JSON.parse(httpResponse.data);
