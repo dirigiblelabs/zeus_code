@@ -10,9 +10,34 @@
 	Node.prototype.logger.ctx = "Node Svc";
 	
 	Node.prototype.cfg[""].post.produces = "application/json";
+	Node.prototype.cfg[""].get.handler = function(context, io) {
+		var httpClient = require('net/http/client');
+			var namespace = "default";
+			var deploymentData = {
+				'name': 'july' + new Date().getTime(),
+				'image': 'docker.io/dirigiblelabs/dirigible-tomcat:latest',
+				'replicas': 1,
+				'env': [{
+					'name': 'DefaultDB_username',
+					'value': 'root'
+				}],
+				'autoscale': {
+					'enabled': false,
+					'minReplicas': 1,
+					'maxReplicas': 5,
+					'targetCPUUtilizationPercentage': 50
+				}
+			};
+
+			var httpResponse = httpClient.get('http://localhost:8080/services/js/zeus/api/landscapes.js?namespace=' + namespace);
+
+			var data = JSON.parse(httpResponse.data);
+	    	io.response.println(JSON.stringify(data));
+			io.response.setStatus(io.response.OK);
+	};
+
 	Node.prototype.cfg[""].post.handler = function(context, io) {
 	    try{
-			
 			var httpClient = require('net/http/client');
 			var namespace = "default";
 			var deploymentData = {
@@ -38,14 +63,13 @@
 
 			var data = JSON.parse(httpResponse.data);
 			var env = require('core/env');
-	    	var nodeJson = {
-	    		cn_name: data.deployment.metadata.name,
-	    		cn_url: env.get('zeus.landscapes.ip') + ':' + data.service.spec.ports[0].nodePort
-	    	};
-	    	console.error(nodeJson);
-	    	io.response.println(JSON.stringify(nodeJson));
+			var url = env.get('zeus.landscapes.ip') + ':' + data.service.spec.ports[0].nodePort;
+			data = data.deployment;
+			data.url = url;
+    		
+	    	io.response.println(JSON.stringify(data));
 			io.response.setStatus(io.response.OK);
-			io.response.setHeader('Location', nodeJson.url);
+			io.response.setHeader('Location', data.url);
 		} catch(e) {
     	    var errorCode = io.response.INTERNAL_SERVER_ERROR;
     	    this.logger.error(errorCode, e.message, e.errContext);
