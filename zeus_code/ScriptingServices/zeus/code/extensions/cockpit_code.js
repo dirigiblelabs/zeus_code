@@ -2,7 +2,7 @@
 /* eslint-env node, dirigible */
 
 const PATH = "/code";
-const HTML_LINK = "../../../index.html";
+const HTML_LINK = "../code/index.html";
 
 //exports.getMenuItem = function() {
 //	return {  
