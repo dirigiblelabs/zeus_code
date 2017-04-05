@@ -1,0 +1,32 @@
+{
+  "tableName":"zeus_code_dev_instances",
+  "columns":
+    [
+      {
+        "name":"ID",
+        "type":"INTEGER",
+        "length":"0",
+        "notNull":"true",
+        "primaryKey":"true",
+        "defaultValue":""
+      }
+      ,
+      {
+        "name":"NAME",
+        "type":"VARCHAR",
+        "length":"50",
+        "notNull":"true",
+        "primaryKey":"false",
+        "defaultValue":""
+      }
+      ,
+      {
+        "name":"URL",
+        "type":"VARCHAR",
+        "length":"50",
+        "notNull":"true",
+        "primaryKey":"false",
+        "defaultValue":""
+      }
+    ]
+}

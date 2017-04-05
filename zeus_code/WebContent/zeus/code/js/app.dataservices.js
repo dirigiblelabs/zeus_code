@@ -3,7 +3,6 @@
 
 	angular.module('zeus-code')
 	.service('ResourceSvcConfiguration', ['$log', function($log) {
-	
 		return {
 			cfg: {
 			    save: {
@@ -30,10 +29,10 @@
 	}])
 	.service('Node', ['$resource', 'ResourceSvcConfiguration', function($resource, ResourceSvcConfiguration) {
 		var cfg = angular.copy(ResourceSvcConfiguration.cfg);
-	  	return $resource('../../../js-secured/zeus/code/svc/node.js/:nodeId', { nodeId:'@id' }, cfg);
+	  	return $resource('../../../js-secured/zeus/code.js/:nodeId', { nodeId:'@id' }, cfg);
 	}])
 	.service('NodeCount', ['$resource', function($resource) {
-	  	return $resource('../../js-secured/zeus/code/svc/node.js/count', {}, 
+	  	return $resource('../../js-secured/zeus/code.js/count', {}, 
 	  			{get: {method:'GET', params:{}, isArray:false, ignoreLoadingBar: true}});
 	}])	
 })(angular);
