@@ -12,7 +12,7 @@
       }
       ,
       {
-        "name":"NAME",
+        "name":"APPLICATION_NAME",
         "type":"VARCHAR",
         "length":"50",
         "notNull":"true",

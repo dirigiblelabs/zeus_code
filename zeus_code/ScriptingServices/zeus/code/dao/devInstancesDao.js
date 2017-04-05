@@ -8,12 +8,12 @@ var datasource = database.getDatasource();
 exports.create = function(entity) {
     var connection = datasource.getConnection();
     try {
-        var sql = 'INSERT INTO ZEUS_CODE_DEV_INSTANCES (ID,NAME,URL) VALUES (?,?,?)';
+        var sql = 'INSERT INTO ZEUS_CODE_DEV_INSTANCES (ID,APPLICATION_NAME,URL) VALUES (?,?,?)';
         var statement = connection.prepareStatement(sql);
         var i = 0;
         var id = datasource.getSequence('ZEUS_CODE_DEV_INSTANCES_ID').next();
         statement.setInt(++i, id);
-        statement.setString(++i, entity.name);
+        statement.setString(++i, entity.application_name);
         statement.setString(++i, entity.url);
         statement.executeUpdate();
     	return id;
@@ -41,14 +41,14 @@ exports.get = function(id) {
     return entity;
 };
 
-// Return a single entity by Name
-exports.getByName = function(name) {
+// Return a single entity by applicationName
+exports.getByName = function(applicationName) {
 	var entity = null;
     var connection = datasource.getConnection();
     try {
-        var sql = 'SELECT * FROM ZEUS_CODE_DEV_INSTANCES WHERE NAME = ?';
+        var sql = 'SELECT * FROM ZEUS_CODE_DEV_INSTANCES WHERE APPLICATION_NAME = ?';
         var statement = connection.prepareStatement(sql);
-        statement.setString(1, name);
+        statement.setString(1, applicationName);
 
         var resultSet = statement.executeQuery();
         if (resultSet.next()) {
@@ -94,10 +94,10 @@ exports.list = function(limit, offset, sort, desc) {
 exports.update = function(entity) {
     var connection = datasource.getConnection();
     try {
-        var sql = 'UPDATE ZEUS_CODE_DEV_INSTANCES SET NAME = ?,URL = ? WHERE ID = ?';
+        var sql = 'UPDATE ZEUS_CODE_DEV_INSTANCES SET APPLICATION_NAME = ?,URL = ? WHERE ID = ?';
         var statement = connection.prepareStatement(sql);
         var i = 0;
-        statement.setString(++i, entity.name);
+        statement.setString(++i, entity.application_name);
         statement.setString(++i, entity.url);
         var id = entity.id;
         statement.setInt(++i, id);
@@ -150,7 +150,7 @@ exports.metadata = function() {
 			required: 'true'
 		},
 		{
-			name: 'name',
+			name: 'application_name',
 			type: 'string'
 		},
 		{
@@ -166,7 +166,7 @@ exports.metadata = function() {
 function createEntity(resultSet) {
     var result = {};
 	result.id = resultSet.getInt('ID');
-    result.name = resultSet.getString('NAME');
+    result.application_name = resultSet.getString('application_NAME');
     result.url = resultSet.getString('URL');
     return result;
 }

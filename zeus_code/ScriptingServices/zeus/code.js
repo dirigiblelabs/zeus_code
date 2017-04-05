@@ -5,8 +5,6 @@ var request = require('net/http/request');
 var response = require('net/http/response');
 var applications = require('zeus/utils/applications');
 var uuid = require('utils/uuid');
-var kubernetesIngresses = require('kubernetes/ingresses');
-var kubernetesIngressUtils = require('kubernetes/utils/ingress');
 var cluster = require('zeus/utils/cluster');
 
 var devInstancesDao = require('zeus/code/dao/devInstancesDao');
@@ -50,36 +48,25 @@ function handlePostRequest(httpRequest, httpResponse) {
 	var applicationName = 'dev-' + uuid.random();
 	applicationName = applicationName.substring(0, 11);
 
-	applications.deploy(applicationTemplateId, applicationName);
-	var url = addIngress(applicationName);
-
-	var devInstance = {
-		'name': applicationName,
-		'url': url
-	};
-
-	devInstancesDao.create(devInstance);
+	var devInstance = applications.deploy(applicationTemplateId, applicationName, getIngress(applicationName));
 
 	sendResponse(httpResponse, httpResponse.CREATED, 'application/json', JSON.stringify(devInstance));
 }
 
-function addIngress(applicationName) {
-	var clusterSettings = cluster.getSettings();
-
-	var ingress = {
+function getIngress(applicationName) {
+	return {
 		'applicationName': applicationName,
 		'host': applicationName + '.apps.eu-central-1.sap.onvms.com', // TODO To be provisioned via clusterSettings.domain !!!
 		'name': applicationName,
-		'namespace': clusterSettings.namespace,
+		'namespace': cluster.getSettings().namespace,
 		'path': '/',
 		'serviceName': applicationName + '-http',
-		'servicePort': 8080
+		'servicePort': 8080,
+		'isDevInstance': true,
+		'labels': {
+			'applicationName': applicationName
+		}
 	};
-
-	var ingressObject = kubernetesIngressUtils.getObject(ingress.name, ingress.namespace, ingress.labels, ingress.host, ingress.path, ingress.serviceName, ingress.servicePort);
-	kubernetesIngresses.create(clusterSettings.server, clusterSettings.token, clusterSettings.namespace, ingressObject);
-
-	return 'http://' + ingress.host;
 }
 
 function handleNotAllowedRequest(httpResponse) {
